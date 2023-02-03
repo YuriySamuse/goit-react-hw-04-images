@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 // import * as yup from 'yup';
 // import PropTypes from 'prop-types';
 
-/*
-import // FormContainer,
-SearchField,
-SearchinForm,
-InputSearchForm,
-BtnSearchForm,
-Error,
-'components/Searchbar/Searchbar.styled';
+import {
+  SearchbarStyled,
+  SearchForm,
+  SearchFormInput,
+  BtnSearchForm,
+  SearchFormBtnLabel,
+} from 'components/Searchbar/Searchbar.styled';
+// import { FiSearch } from 'react-icons/fi';
 
+/*
 const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 const schema = yup.object().shape({
   name: yup.string().matches(nameRegExp, 'Name is not valid'),
@@ -44,22 +45,25 @@ class Searchbar extends Component {
     const { search } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
-      <form onSubmit={handleSubmit}>
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
-        </button>
+      <SearchbarStyled>
+        <SearchForm onSubmit={handleSubmit}>
+          <BtnSearchForm type="submit">
+            {/* <FiSearch /> */}
+            <SearchFormBtnLabel>Search</SearchFormBtnLabel>
+          </BtnSearchForm>
 
-        <input
-          value={search}
-          onChange={handleChange}
-          name="search"
-          // className="input"
-          // type="text"
-          // autoComplete="off"
-          // autoFocus
-          placeholder="Search images and photos"
-        />
-      </form>
+          <SearchFormInput
+            value={search}
+            onChange={handleChange}
+            name="search"
+            className="input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+        </SearchForm>
+      </SearchbarStyled>
     );
   }
 }
