@@ -18,34 +18,57 @@ export class App extends Component {
   //   this.setState({ imageName, page:1, photos: []});
 
   searchImage = ({ search }) => {
-    this.setState({ search });
+    this.setState({ search, items: [], page: 1 });
   };
 
+  loadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
+  /*
   componentDidUpdate(prevPros, prevState) {
-    const { search } = this.state;
-
-    if (prevState.search !== search) {
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page !== page) {
       this.setState({ loading: true });
-      fetchImages(search)
-        .then(data => this.setState({ items: data.hits }))
+      fetchImages(search, page)
+        .then(data =>
+          this.setState(({ items }) => ({
+            items: [...items, ...data.hits],
+          }))
+        )
         .catch(error => this.setState({ error: error.message }))
         .finally(() => this.setState({ loading: false }));
       // console.log(this.state.search);
     }
   }
-  // handleSerchSubmit = search => {
-  //   console.log(search);
-  // };
+*/
+
+  async componentDidUpdate(prevPros, prevState) {
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page !== page) {
+      try {
+        this.setState({ loading: true });
+        const data = await fetchImages(search, page);
+        this.setState(({ items }) => ({
+          items: [...items, ...data.hits],
+        }));
+      } catch (error) {
+        this.setState({ error: error.message });
+      } finally {
+        this.setState({ loading: false });
+      }
+    }
+  }
 
   render() {
     const { items, loading, error } = this.state;
-    const { searchImage } = this;
+    const { searchImage, loadMore } = this;
     return (
       <>
         <Searchbar onSubmit={searchImage} />
         <ImageGallery items={items} />
         {loading && <p>...Loading images</p>}
         {error && <p>{error}</p>}
+        {Boolean(items.length) && <button onClick={loadMore}>load more</button>}
       </>
     );
   }

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Form, Field, ErrorMessage } from 'formik';
+// import { Form, Field, ErrorMessage } from 'formik';
 
 export const FormContainer = styled.form`
   top: 0;
@@ -61,11 +61,13 @@ export const SearchFormInput = styled.input`
     font-size: 18px;
   }
 `;
+/*
 export const Error = styled(ErrorMessage)`
   color: tomato;
   font-size: 16px;
   text-align: center;
 `;
+*/
 
 export const BtnSearchForm = styled.button`
   display: inline-block;
