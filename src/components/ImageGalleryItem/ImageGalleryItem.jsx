@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { ImgItemStyle } from 'components/ImageGalleryItem/ImageGallertItem.styled';
+
 const ImageGalleryItem = ({ webURL, tags, largeImg }) => {
-  return <img src={webURL} alt={tags} data-source={largeImg} />;
+  return <ImgItemStyle src={webURL} alt={tags} data-source={largeImg} />;
 };
 
 ImageGalleryItem.propTypes = {
