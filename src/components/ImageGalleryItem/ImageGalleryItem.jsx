@@ -1,16 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ImgItemStyle } from 'components/ImageGalleryItem/ImageGallertItem.styled';
+import { Image } from 'components/ImageGalleryItem/ImageGallertItem.styled';
 
-const ImageGalleryItem = ({ webURL, tags, largeImg }) => {
-  return <ImgItemStyle src={webURL} alt={tags} data-source={largeImg} />;
+const ImageGalleryItem = ({ webURL, tags, largeImg, onSelect }) => {
+  return (
+    <Image
+      src={webURL}
+      alt={tags}
+      onClick={() => {
+        onSelect(largeImg);
+      }}
+    />
+  );
 };
 
 ImageGalleryItem.propTypes = {
   webURL: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
   largeImg: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;

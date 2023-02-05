@@ -5,13 +5,14 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
 import { ImgGallery } from 'components/ImageGallery/ImageGelery.styled';
 
-const ImageGallery = ({ items }) => {
+const ImageGallery = ({ items, onSelect }) => {
   const elements = items.map(({ id, webformatURL, tags, largeImageURL }) => (
     <li key={id} className="gallery-item">
       <ImageGalleryItem
         webURL={webformatURL}
         tags={tags}
         largeImg={largeImageURL}
+        onSelect={onSelect}
       />
     </li>
   ));

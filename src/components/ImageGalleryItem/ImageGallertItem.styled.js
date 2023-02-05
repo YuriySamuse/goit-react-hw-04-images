@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ImgItemStyle = styled.img`
+export const Image = styled.img`
   width: 100%;
   height: 260px;
   object-fit: cover;

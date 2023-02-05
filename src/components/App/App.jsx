@@ -4,7 +4,7 @@ import { Loader } from 'components/Loader/Loader';
 import Searchbar from 'components/Searchbar/Searchbar';
 import ImageGallery from 'components/ImageGallery/ImagGallery';
 import { fetchImages } from 'components/services/image-api';
-import Modal from 'components/services/Modal/Modal';
+import { ModalImage } from 'components/services/Modal/Modal';
 
 import { ButtonLoadMore } from 'components/App/App.styled';
 
@@ -15,7 +15,7 @@ export class App extends Component {
     items: [],
     loading: false,
     error: null,
-    showModal: false,
+    selectedImage: false,
   };
 
   searchImage = ({ search }) => {
@@ -24,6 +24,18 @@ export class App extends Component {
 
   loadMore = () => {
     this.setState(({ page }) => ({ page: page + 1 }));
+  };
+
+  selectImage = imgUrl => {
+    this.setState({
+      selectedImage: imgUrl,
+    });
+  };
+
+  resetImage = () => {
+    this.setState({
+      selectedImage: null,
+    });
   };
 
   async componentDidUpdate(prevPros, prevState) {
@@ -45,19 +57,18 @@ export class App extends Component {
   }
 
   render() {
-    const { items, loading, error, showModal } = this.state;
-    const { searchImage, loadMore } = this;
+    const { items, loading, selectedImage } = this.state;
+    const { searchImage, loadMore, selectImage, resetImage } = this;
     return (
       <>
         <Searchbar onSubmit={searchImage} />
-        <ImageGallery items={items} />
+        <ImageGallery items={items} onSelect={selectImage} />
         {loading && <Loader />}
         {/* {error && <p>{error}</p>} */}
         {Boolean(items.length) && (
           <ButtonLoadMore onClick={loadMore}>load more</ButtonLoadMore>
         )}
-
-        {showModal && <Modal />}
+        <ModalImage selectImage={selectedImage} resetImage={resetImage} />
         <Toaster position="bottom-center" />
       </>
     );
