@@ -2,7 +2,6 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { Formik } from 'formik';
 // import * as yup from 'yup';
-// import PropTypes from 'prop-types';
 
 import {
   SearchbarStyled,
@@ -11,7 +10,7 @@ import {
   BtnSearchForm,
   SearchFormBtnLabel,
 } from 'components/Searchbar/Searchbar.styled';
-// import { FiSearch } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 
 /*
 const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
@@ -48,7 +47,7 @@ class Searchbar extends Component {
       <SearchbarStyled>
         <SearchForm onSubmit={handleSubmit}>
           <BtnSearchForm type="submit">
-            {/* <FiSearch /> */}
+            <FiSearch />
             <SearchFormBtnLabel>Search</SearchFormBtnLabel>
           </BtnSearchForm>
 

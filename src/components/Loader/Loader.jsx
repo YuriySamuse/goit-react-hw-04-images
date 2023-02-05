@@ -1,11 +1,19 @@
-import { MagnifyingGlass } from 'react-loader-spinner';
-<MagnifyingGlass
-  visible={true}
-  height="80"
-  width="80"
-  ariaLabel="MagnifyingGlass-loading"
-  wrapperStyle={{}}
-  wrapperClass="MagnifyingGlass-wrapper"
-  glassColor="#c0efff"
-  color="#e15b64"
-/>;
+import FadeLoader from 'react-spinners/FadeLoader';
+
+export const Loader = () => {
+  return (
+    <FadeLoader
+      color="blue"
+      loading="loading"
+      size={100}
+      cssOverride={{
+        position: 'fixed',
+        top: '50%',
+        left: ' 50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+  );
+};

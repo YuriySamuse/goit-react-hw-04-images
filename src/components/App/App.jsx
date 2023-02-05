@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-// import { ToastContainer } from 'react-toastify';
-// import { MagnifyingGlass } from 'react-loader-spinner';
+import toast, { Toaster } from 'react-hot-toast';
+import { Loader } from 'components/Loader/Loader';
 import Searchbar from 'components/Searchbar/Searchbar';
 import ImageGallery from 'components/ImageGallery/ImagGallery';
 import { fetchImages } from 'components/services/image-api';
+import Modal from 'components/services/Modal/Modal';
+
+import { ButtonLoadMore } from 'components/App/App.styled';
 
 export class App extends Component {
   state = {
@@ -12,10 +15,8 @@ export class App extends Component {
     items: [],
     loading: false,
     error: null,
+    showModal: false,
   };
-
-  // searchImage = async (imageName) => {
-  //   this.setState({ imageName, page:1, photos: []});
 
   searchImage = ({ search }) => {
     this.setState({ search, items: [], page: 1 });
@@ -24,23 +25,6 @@ export class App extends Component {
   loadMore = () => {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
-  /*
-  componentDidUpdate(prevPros, prevState) {
-    const { search, page } = this.state;
-    if (prevState.search !== search || prevState.page !== page) {
-      this.setState({ loading: true });
-      fetchImages(search, page)
-        .then(data =>
-          this.setState(({ items }) => ({
-            items: [...items, ...data.hits],
-          }))
-        )
-        .catch(error => this.setState({ error: error.message }))
-        .finally(() => this.setState({ loading: false }));
-      // console.log(this.state.search);
-    }
-  }
-*/
 
   async componentDidUpdate(prevPros, prevState) {
     const { search, page } = this.state;
@@ -52,7 +36,8 @@ export class App extends Component {
           items: [...items, ...data.hits],
         }));
       } catch (error) {
-        this.setState({ error: error.message });
+        // this.setState({ error: error.message });
+        toast.error('Помилковй запит, спробуйте щось інше.');
       } finally {
         this.setState({ loading: false });
       }
@@ -60,15 +45,20 @@ export class App extends Component {
   }
 
   render() {
-    const { items, loading, error } = this.state;
+    const { items, loading, error, showModal } = this.state;
     const { searchImage, loadMore } = this;
     return (
       <>
         <Searchbar onSubmit={searchImage} />
         <ImageGallery items={items} />
-        {loading && <p>...Loading images</p>}
-        {error && <p>{error}</p>}
-        {Boolean(items.length) && <button onClick={loadMore}>load more</button>}
+        {loading && <Loader />}
+        {/* {error && <p>{error}</p>} */}
+        {Boolean(items.length) && (
+          <ButtonLoadMore onClick={loadMore}>load more</ButtonLoadMore>
+        )}
+
+        {showModal && <Modal />}
+        <Toaster position="bottom-center" />
       </>
     );
   }
