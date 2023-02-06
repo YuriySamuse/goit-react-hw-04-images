@@ -19,7 +19,9 @@ export class App extends Component {
   };
 
   searchImage = ({ search }) => {
-    this.setState({ search, items: [], page: 1 });
+    if (search !== this.state.search) {
+      this.setState({ search, items: [], page: 1 });
+    }
   };
 
   loadMore = () => {
