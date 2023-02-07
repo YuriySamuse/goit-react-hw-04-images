@@ -19,8 +19,10 @@ export class App extends Component {
   };
 
   searchImage = ({ search }) => {
-    if (search !== this.state.search) {
-      this.setState({ search, items: [], page: 1 });
+    if (search === '') {
+      toast.error('Запит не може бути порожнім, спробуйте щось ввести.');
+    } else if (search !== this.state.search) {
+      this.setState({ search: search, items: [], page: 1 });
     }
   };
 

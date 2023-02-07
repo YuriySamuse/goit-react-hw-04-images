@@ -2,24 +2,31 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 const modalStyles = {
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: '1000',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex: '1200',
   },
 
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '0',
-    maxHeight: '80%',
+    position: 'relative',
+    top: '0',
+    left: '0',
+    maxWidth: 'calc(100vw - 48px)',
+    maxHeight: 'calc(100vh - 24px)',
+    backgroundColor: 'transparent',
     border: 'none',
     overflow: 'hidden',
+    padding: '0',
   },
 };
-Modal.setAppElement('#modal-root');
+Modal.setAppElement('#root');
 
 export const ModalImage = ({ selectImage, resetImage }) => {
   return (
@@ -27,7 +34,7 @@ export const ModalImage = ({ selectImage, resetImage }) => {
       isOpen={Boolean(selectImage)}
       onRequestClose={resetImage}
       style={modalStyles}
-      shouldCloseOnOverlayClick="true"
+      // shouldCloseOnOverlayClick="true"
     >
       <img src={selectImage} alt="Large img" />
     </Modal>

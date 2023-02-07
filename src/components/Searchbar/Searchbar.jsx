@@ -20,9 +20,7 @@ const schema = yup.object().shape({
 */
 
 class Searchbar extends Component {
-  state = {
-    search: '',
-  };
+  state = { search: '' };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -33,7 +31,7 @@ class Searchbar extends Component {
     e.preventDefault();
     const { onSubmit } = this.props;
     onSubmit({ ...this.state });
-    this.reset();
+    // this.reset();
   };
 
   reset() {
