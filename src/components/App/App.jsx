@@ -39,11 +39,11 @@ const App = () => {
         setItems(prevItems => [...prevItems, ...data]);
         setLoading(false);
       } catch (error) {
-        toast.error('Запит не може бути порожнім, спробуйте щось ввести.');
+        toast.error('Трапилась помилка, спробуйте ще раз пізніше.');
       }
     }
     foo();
-  }, [page, search]);
+  }, [page, search, setLoading]);
 
   const searchImage = ({ search }) => {
     setPage(1);
