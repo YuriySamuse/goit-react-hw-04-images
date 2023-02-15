@@ -34,7 +34,6 @@ export const ModalImage = ({ selectImage, resetImage }) => {
       isOpen={Boolean(selectImage)}
       onRequestClose={resetImage}
       style={modalStyles}
-      // shouldCloseOnOverlayClick="true"
     >
       <img src={selectImage} alt="Large img" />
     </Modal>

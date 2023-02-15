@@ -13,7 +13,6 @@ const App = () => {
   const [search, setSearch] = useState('');
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(false);
 
   useEffect(() => {
@@ -47,7 +46,6 @@ const App = () => {
   }, [page, search]);
 
   const searchImage = ({ search }) => {
-    // console.log(search);
     setPage(1);
     setItems([]);
     setSearch(search);
@@ -79,6 +77,7 @@ const App = () => {
 };
 
 export default App;
+
 /*
 export class App extends Component {
   state = {
