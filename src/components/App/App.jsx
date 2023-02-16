@@ -10,22 +10,27 @@ import { ButtonLoadMore } from 'components/App/App.styled';
 
 const App = () => {
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('');
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(false);
 
   useEffect(() => {
-    if (search === '') {
+    if (query === '') {
+      // toast.error('Спробуйте інший запит.');
       return;
     }
     async function foo() {
       try {
         setLoading(true);
-        const responce = await fetchImages(search, page);
+        const responce = await fetchImages(query, page);
         if (responce.totalHits === 0) {
           toast.error('Зображень не знайдено. Спробуйте інший запит.');
         }
+        // if () {
+        //   toast.error('У вашому запиті нічого не змінилось.');
+        //   return;
+        // }
         const data = responce.hits.map(
           ({ id, largeImageURL, tags, webformatURL }) => {
             return {
@@ -43,12 +48,12 @@ const App = () => {
       }
     }
     foo();
-  }, [page, search, setLoading]);
+  }, [page, query, setLoading]);
 
-  const searchImage = ({ search }) => {
+  const searchImage = ({ query }) => {
     setPage(1);
     setItems([]);
-    setSearch(search);
+    setQuery(query);
   };
 
   const loadMore = () => {

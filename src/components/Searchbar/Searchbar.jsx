@@ -12,15 +12,15 @@ import {
 import { FiSearch } from 'react-icons/fi';
 
 const Searchbar = ({ onSubmit }) => {
-  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('');
 
   const handleChange = e => {
-    setSearch(e.currentTarget.value.toLowerCase());
+    setQuery(e.currentTarget.value.toLowerCase());
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ search });
+    onSubmit({ query });
     // setSearch('');
   };
 
@@ -33,7 +33,7 @@ const Searchbar = ({ onSubmit }) => {
         </BtnSearchForm>
 
         <SearchFormInput
-          value={search}
+          value={query}
           onChange={handleChange}
           name="search"
           className="input"
