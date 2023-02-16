@@ -17,7 +17,6 @@ const App = () => {
 
   useEffect(() => {
     if (query === '') {
-      // toast.error('Спробуйте інший запит.');
       return;
     }
     async function foo() {
@@ -27,10 +26,7 @@ const App = () => {
         if (responce.totalHits === 0) {
           toast.error('Зображень не знайдено. Спробуйте інший запит.');
         }
-        // if () {
-        //   toast.error('У вашому запиті нічого не змінилось.');
-        //   return;
-        // }
+
         const data = responce.hits.map(
           ({ id, largeImageURL, tags, webformatURL }) => {
             return {
@@ -48,12 +44,21 @@ const App = () => {
       }
     }
     foo();
-  }, [page, query, setLoading]);
+  }, [page, query]);
 
-  const searchImage = ({ query }) => {
+  const searchImage = submitedQuery => {
+    // console.log('searchImage', query, submitedQuery,);
+    if (submitedQuery === '') {
+      toast.error('Запит не може бути порожнім, спробуйте щось ввести.');
+      return;
+    }
+    if (submitedQuery === query) {
+      toast.error('У вашому запиті нічого не змінилось.');
+      return;
+    }
     setPage(1);
     setItems([]);
-    setQuery(query);
+    setQuery(submitedQuery);
   };
 
   const loadMore = () => {

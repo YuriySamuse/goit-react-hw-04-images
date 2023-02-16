@@ -16,11 +16,14 @@ const Searchbar = ({ onSubmit }) => {
 
   const handleChange = e => {
     setQuery(e.currentTarget.value.toLowerCase());
+    // console.log('handleChange', e.currentTarget.value.toLowerCase());
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ query });
+    // console.log('handleSubmit', query, { query });
+    // onSubmit({ submitedQuery: query });
+    onSubmit(query);
     // setSearch('');
   };
 
